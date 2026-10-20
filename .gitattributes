@@ -1,0 +1,4 @@
+# keep line endings consistent between Windows and macOS clones
+* text=auto eol=lf
+*.png binary
+*.jpg binary

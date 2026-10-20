@@ -1,0 +1,23 @@
+// act 1: the smallest useful gRPC contract.
+// every client and server in this repo is generated from this one file; none of them hand-write the wire format.
+syntax = "proto3";
+
+// the version lives in the package so a breaking v2 can sit alongside v1 rather than replace it
+package greeter.v1;
+
+// says hello. that's it. that's the service.
+service GreeterService {
+  // unary: one request in, one reply out, just like calling a local function
+  rpc SayHello(SayHelloRequest) returns (SayHelloResponse);
+}
+
+// who to greet
+message SayHelloRequest {
+  // field numbers (the "= 1"), not names, are what travel over the wire
+  string name = 1;
+}
+
+// the greeting
+message SayHelloResponse {
+  string message = 1;
+}

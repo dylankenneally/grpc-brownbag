@@ -1,0 +1,11 @@
+// the lunch order exactly as the till first shipped it. every other folder here is a proposed edit to this file.
+syntax = "proto3";
+
+package evolution.v1;
+
+message LunchOrder {
+  string dish = 1;
+  uint32 quantity = 2;
+  uint32 price_cents = 3;
+  uint32 ordered_at_unix = 4;
+}

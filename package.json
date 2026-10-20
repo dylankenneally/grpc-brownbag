@@ -1,0 +1,55 @@
+{
+  "name": "grpc-brownbag",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Runnable gRPC demos for a lunchtime brown bag session: C#, TypeScript and Go ordering lunch from each other.",
+  "license": "UNLICENSED",
+  "type": "module",
+  "engines": {
+    "node": ">=22.13.0"
+  },
+  "workspaces": [
+    "node/client",
+    "node/tools",
+    "web"
+  ],
+  "scripts": {
+    "doctor": "node scripts/doctor.mjs",
+    "setup": "node scripts/setup.mjs",
+    "generate": "node scripts/generate.mjs",
+    "build": "dotnet build dotnet/BrownBag.slnx",
+    "build:go": "go -C go build -o bin/ ./cmd/...",
+    "server": "dotnet run --no-build --project dotnet/Server",
+    "cs": "dotnet run --no-build --project dotnet/Client --",
+    "ts": "npm run -s cli -w node/client --",
+    "act1": "npm run -s cs -- greet && npm run -s ts -- greet",
+    "act1:cs": "npm run -s cs -- greet",
+    "act1:ts": "npm run -s ts -- greet",
+    "act2": "npm run -s act2:unary && npm run -s act2:server-stream && npm run -s act2:client-stream && npm run -s act2:deadline",
+    "act2:unary": "npm run -s ts -- menu && npm run -s cs -- item kale && npm run -s ts -- item caviar",
+    "act2:server-stream": "npm run -s cs -- watch schrodingers-soup",
+    "act2:client-stream": "npm run -s ts -- team",
+    "act2:deadline": "npm run -s ts -- watch brisket",
+    "chat:cs": "npm run -s cs -- chat",
+    "chat:ts": "npm run -s ts -- chat",
+    "act3": "npm run -s wire -w node/tools",
+    "act4": "npm run -s payload -w node/tools",
+    "act5": "npm run -s multiplex -w node/tools",
+    "act6": "npm run -s lb-trap -w node/tools",
+    "act7": "npm run -s evolution -w node/tools",
+    "act8": "npm run -s dev -w web",
+    "act9": "npm run -s polyglot -w node/tools",
+    "lint": "eslint . && buf lint",
+    "typecheck": "tsc -p tsconfig.json && tsc -p node/client && tsc -p node/tools && tsc -p web"
+  },
+  "devDependencies": {
+    "@bufbuild/buf": "1.74.0",
+    "@bufbuild/protoc-gen-es": "2.16.0",
+    "@eslint/js": "10.0.1",
+    "@types/node": "22.20.5",
+    "eslint": "10.13.0",
+    "globals": "17.13.0",
+    "typescript": "6.0.3",
+    "typescript-eslint": "8.72.0"
+  }
+}

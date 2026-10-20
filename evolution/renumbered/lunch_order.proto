@@ -1,0 +1,12 @@
+// ❌ unsafe: someone "tidied" the numbers to match the order fields appear on screen.
+// the names look right, but the wire only carries numbers, so quantity and price swap places.
+syntax = "proto3";
+
+package evolution.v1;
+
+message LunchOrder {
+  string dish = 1;
+  uint32 price_cents = 2;
+  uint32 quantity = 3;
+  uint32 ordered_at_unix = 4;
+}

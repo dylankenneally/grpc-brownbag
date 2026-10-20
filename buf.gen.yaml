@@ -1,0 +1,20 @@
+# `npm run generate`: turns proto/ into TypeScript for every Node and browser consumer.
+# .NET generates its own C# during `dotnet build`, and Go has its own template (buf.gen.go.yaml).
+# plugins run locally from node_modules, so no source leaves the machine.
+version: v2
+clean: true
+inputs:
+  - directory: proto
+plugins:
+  # the Node console client
+  - local: protoc-gen-es
+    out: node/client/src/gen
+    opt: [target=ts, import_extension=js]
+  # the Node demo tools
+  - local: protoc-gen-es
+    out: node/tools/src/gen
+    opt: [target=ts, import_extension=js]
+  # the browser page
+  - local: protoc-gen-es
+    out: web/src/gen
+    opt: [target=ts, import_extension=js]

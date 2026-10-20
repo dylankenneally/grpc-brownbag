@@ -1,0 +1,12 @@
+// ❌ unsafe: ordered_at_unix was deleted ("nobody uses it") and its number handed to a new field.
+// old messages still carry a timestamp in field 4, which this reader now thinks is a tip.
+syntax = "proto3";
+
+package evolution.v1;
+
+message LunchOrder {
+  string dish = 1;
+  uint32 quantity = 2;
+  uint32 price_cents = 3;
+  uint32 tip_cents = 4;
+}

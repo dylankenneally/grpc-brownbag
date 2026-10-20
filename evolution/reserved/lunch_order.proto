@@ -1,0 +1,15 @@
+// ✅ safe: the same deletion done properly. the old number and name are reserved so nobody can reuse them,
+// and the new field gets a fresh number.
+syntax = "proto3";
+
+package evolution.v1;
+
+message LunchOrder {
+  reserved 4;
+  reserved "ordered_at_unix";
+
+  string dish = 1;
+  uint32 quantity = 2;
+  uint32 price_cents = 3;
+  uint32 tip_cents = 5;
+}

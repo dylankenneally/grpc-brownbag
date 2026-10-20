@@ -1,0 +1,12 @@
+// ✅ safe: a new field on a new number. old readers skip it; new readers see "" in old messages.
+syntax = "proto3";
+
+package evolution.v1;
+
+message LunchOrder {
+  string dish = 1;
+  uint32 quantity = 2;
+  uint32 price_cents = 3;
+  uint32 ordered_at_unix = 4;
+  string special_requests = 5;
+}

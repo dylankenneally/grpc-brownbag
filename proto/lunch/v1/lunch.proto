@@ -1,0 +1,107 @@
+// the lunch kitchen: one service that shows all four gRPC call patterns.
+syntax = "proto3";
+
+package lunch.v1;
+
+// orders lunch. may or may not deliver it.
+service LunchService {
+  // unary: the whole menu in one reply
+  rpc GetMenu(GetMenuRequest) returns (GetMenuResponse);
+
+  // unary: one dish, or NOT_FOUND if we were never in of that
+  rpc GetMenuItem(GetMenuItemRequest) returns (GetMenuItemResponse);
+
+  // server streaming: one request, then a live feed of kitchen updates until the dish is ready
+  rpc WatchOrder(WatchOrderRequest) returns (stream WatchOrderResponse);
+
+  // client streaming: everyone adds their line, then one bill comes back
+  rpc PlaceTeamOrder(stream PlaceTeamOrderRequest) returns (PlaceTeamOrderResponse);
+
+  // bidirectional streaming: a lunch chat room, with a bot that won't stop talking
+  rpc LunchChat(stream LunchChatRequest) returns (stream LunchChatResponse);
+}
+
+// how much you'll regret it
+enum SpiceLevel {
+  SPICE_LEVEL_UNSPECIFIED = 0;
+  SPICE_LEVEL_MILD = 1;
+  SPICE_LEVEL_MEDIUM = 2;
+  SPICE_LEVEL_HOT = 3;
+  SPICE_LEVEL_REGRET = 4;
+}
+
+// one dish on the menu
+message MenuItem {
+  string id = 1;
+  string name = 2;
+  string description = 3;
+  // money as whole cents, never a float
+  uint32 price_cents = 4;
+  SpiceLevel spice_level = 5;
+  uint32 calories = 6;
+  repeated string tags = 7;
+}
+
+message GetMenuRequest {}
+
+message GetMenuResponse {
+  repeated MenuItem items = 1;
+}
+
+message GetMenuItemRequest {
+  string item_id = 1;
+}
+
+message GetMenuItemResponse {
+  MenuItem item = 1;
+}
+
+// where the dish is up to
+enum OrderStage {
+  ORDER_STAGE_UNSPECIFIED = 0;
+  ORDER_STAGE_PLACED = 1;
+  ORDER_STAGE_COOKING = 2;
+  ORDER_STAGE_READY = 3;
+}
+
+message WatchOrderRequest {
+  string item_id = 1;
+}
+
+// one update from the kitchen
+message WatchOrderResponse {
+  OrderStage stage = 1;
+  string note = 2;
+}
+
+// one diner's line on the team order
+message PlaceTeamOrderRequest {
+  string diner = 1;
+  string item_id = 2;
+  uint32 quantity = 3;
+}
+
+// what one diner owes
+message DinerTotal {
+  string diner = 1;
+  uint32 total_cents = 2;
+}
+
+// the bill
+message PlaceTeamOrderResponse {
+  uint32 line_count = 1;
+  uint32 total_cents = 2;
+  repeated DinerTotal diners = 3;
+  string remark = 4;
+}
+
+// something you said in the chat
+message LunchChatRequest {
+  string text = 1;
+}
+
+// something someone (or the bot) said in the chat
+message LunchChatResponse {
+  string from = 1;
+  string text = 2;
+}

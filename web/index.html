@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lunch, from a browser</title>
+    <link rel="stylesheet" href="/src/style.css" />
+  </head>
+  <body>
+    <header>
+      <h1>🥪 Lunch, from a browser</h1>
+      <p>The same C# kitchen as the console demos. Open the browser's dev tools Network tab before you click.</p>
+    </header>
+
+    <main>
+      <section aria-labelledby="fetch-heading">
+        <h2 id="fetch-heading">1. Call the gRPC port with plain <code>fetch()</code></h2>
+        <p>Browsers can't speak raw gRPC: they give JavaScript no control over HTTP/2 frames or trailers.</p>
+        <button type="button" id="fetch-button">fetch() the gRPC port</button>
+        <output id="fetch-result" aria-live="polite"></output>
+      </section>
+
+      <section aria-labelledby="menu-heading">
+        <h2 id="menu-heading">2. The same service over gRPC-Web</h2>
+        <p>gRPC-Web wraps each call so a browser can send it, using HTTP/1.1 and putting the trailers in the response body. The kitchen translates it with ASP.NET Core middleware, so no Envoy is needed.</p>
+        <button type="button" id="menu-button">Get the menu (unary)</button>
+        <output id="menu-status" aria-live="polite"></output>
+        <table id="menu-table" hidden>
+          <caption>Today's menu</caption>
+          <thead>
+            <tr><th scope="col">Dish</th><th scope="col">Price</th><th scope="col">Description</th><th scope="col"><span class="visually-hidden">Order</span></th></tr>
+          </thead>
+          <tbody id="menu-body"></tbody>
+        </table>
+      </section>
+
+      <section aria-labelledby="watch-heading">
+        <h2 id="watch-heading">3. Watch an order cook (server streaming)</h2>
+        <p>gRPC-Web supports unary and server streaming. Client streaming and bidirectional streaming need real HTTP/2, so they're not available here.</p>
+        <ol id="watch-log" aria-live="polite"></ol>
+      </section>
+    </main>
+
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

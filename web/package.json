@@ -1,0 +1,19 @@
+{
+  "name": "@brownbag/web",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Browser lunch client: gRPC-Web via Connect-ES, served by Vite.",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build"
+  },
+  "dependencies": {
+    "@bufbuild/protobuf": "2.16.0",
+    "@connectrpc/connect": "2.2.0",
+    "@connectrpc/connect-web": "2.2.0"
+  },
+  "devDependencies": {
+    "vite": "8.3.4"
+  }
+}

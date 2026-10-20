@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>BrownBag.Client</RootNamespace>
+    <AssemblyName>BrownBag.Client</AssemblyName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Google.Protobuf" />
+    <PackageReference Include="Grpc.Net.Client" />
+    <PackageReference Include="Grpc.Tools" PrivateAssets="All" />
+    <!-- only for registering the static resolver used by client-side load balancing -->
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" />
+  </ItemGroup>
+
+  <!-- same .proto files as the server; GrpcServices="Client" generates the strongly typed client stubs instead -->
+  <ItemGroup>
+    <Protobuf Include="$(ProtoRoot)\greeter\v1\greeter.proto" ProtoRoot="$(ProtoRoot)" GrpcServices="Client" Link="Protos\greeter\v1\greeter.proto" />
+    <Protobuf Include="$(ProtoRoot)\lunch\v1\lunch.proto" ProtoRoot="$(ProtoRoot)" GrpcServices="Client" Link="Protos\lunch\v1\lunch.proto" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,23 @@
+{
+  "name": "@brownbag/tools",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Demo tools: wire decoding, payload sizes, multiplexing, the load-balancer trap, schema evolution and the polyglot tour.",
+  "type": "module",
+  "scripts": {
+    "wire": "tsx src/wire.ts",
+    "payload": "tsx src/payload.ts",
+    "multiplex": "tsx src/multiplex.ts",
+    "lb-trap": "tsx src/lb-trap.ts",
+    "evolution": "tsx src/evolution.ts",
+    "polyglot": "tsx src/polyglot.ts"
+  },
+  "dependencies": {
+    "@bufbuild/protobuf": "2.16.0",
+    "@connectrpc/connect": "2.2.0",
+    "@connectrpc/connect-node": "2.2.0"
+  },
+  "devDependencies": {
+    "tsx": "4.23.15"
+  }
+}

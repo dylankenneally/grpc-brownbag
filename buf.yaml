@@ -1,0 +1,10 @@
+# buf workspace: every .proto contract the demos share lives under proto/
+version: v2
+modules:
+  - path: proto
+lint:
+  use:
+    - STANDARD
+breaking:
+  use:
+    - FILE

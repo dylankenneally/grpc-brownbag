@@ -1,0 +1,5 @@
+# one variant of the lunch order; WIRE_JSON flags only changes that break existing bytes or JSON
+version: v2
+breaking:
+  use:
+    - WIRE_JSON

@@ -1,0 +1,19 @@
+# Go code generation for go/ (run by `npm run generate` when Go is installed).
+# the two plugins are Go tools pinned in go/go.mod, so `go tool` runs exactly that version with nothing to install.
+version: v2
+clean: true
+managed:
+  enabled: true
+  override:
+    # go needs an import path for each package; derive it rather than hard-coding go_package in the shared .proto files
+    - file_option: go_package_prefix
+      value: brownbag/gen
+inputs:
+  - directory: proto
+plugins:
+  - local: [go, -C, go, tool, protoc-gen-go]
+    out: go/gen
+    opt: paths=source_relative
+  - local: [go, -C, go, tool, protoc-gen-go-grpc]
+    out: go/gen
+    opt: paths=source_relative

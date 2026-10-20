@@ -1,0 +1,17 @@
+# dependencies
+node_modules/
+
+# generated from proto/ by `npm run generate` (the .proto files are the source of truth)
+gen/
+
+# build output (go/bin holds the built Go programs)
+bin/
+obj/
+dist/
+
+# editors and OS clutter
+.vs/
+.idea/
+*.user
+.DS_Store
+Thumbs.db

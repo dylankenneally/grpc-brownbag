@@ -1,0 +1,10 @@
+# TypeScript for one evolution variant; scripts/generate.mjs runs it once per folder with --output.
+# each variant redefines the same message, so they can't share one generation run.
+version: v2
+clean: true
+plugins:
+  - local: protoc-gen-es
+    out: .
+    opt:
+      - target=ts
+      - import_extension=js

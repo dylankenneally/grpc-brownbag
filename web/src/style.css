@@ -1,0 +1,71 @@
+/* readable on a projector: large type, high contrast, nothing clever */
+:root {
+    color-scheme: light dark;
+    font-family: system-ui, sans-serif;
+    font-size: 20px;
+    line-height: 1.5;
+}
+
+body {
+    max-width: 60rem;
+    margin: 0 auto;
+    padding: 1rem 2rem 4rem;
+}
+
+section {
+    margin-top: 2rem;
+}
+
+button {
+    font: inherit;
+    padding: 0.4rem 1rem;
+    cursor: pointer;
+}
+
+button:focus-visible {
+    outline: 3px solid Highlight;
+    outline-offset: 2px;
+}
+
+output {
+    display: block;
+    margin-top: 0.75rem;
+    white-space: pre-wrap;
+}
+
+table {
+    width: 100%;
+    margin-top: 1rem;
+    border-collapse: collapse;
+}
+
+caption {
+    text-align: left;
+    font-weight: bold;
+}
+
+th,
+td {
+    padding: 0.35rem 0.5rem;
+    border-bottom: 1px solid color-mix(in srgb, currentColor 25%, transparent);
+    text-align: left;
+    vertical-align: top;
+}
+
+.price {
+    text-align: right;
+    white-space: nowrap;
+}
+
+.error {
+    color: light-dark(#a40000, #ff8a80);
+}
+
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+}
